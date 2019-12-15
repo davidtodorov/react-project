@@ -1,0 +1,8 @@
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+a:link {
+    text-decoration: none;
+  }
