@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 
 import Navigation from './Navigation';
+import Login from './Login'
+import Register from './Register'
 
 
 function App() {
@@ -18,29 +20,35 @@ function App() {
       <div className="App">
         <Navigation />
         <Switch>
-          <Route path="/login">
-            <div>Login</div>
-          </Route>
+          <Route exact path="/" component={Header} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </Switch>
-        <header className="App-header">
 
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Reactt
-        </a>
-        </header>
       </div>
     </Router>
 
   );
+}
+
+function Header() {
+  return (
+    <header className="App-header">
+
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+        Edit <code>src/App.js</code> and save to reload.
+      </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn Reactt
+      </a>
+    </header>
+  ) 
 }
 
 export default App;
