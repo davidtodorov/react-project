@@ -32,7 +32,7 @@ function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <nav className={classes.root}>
       <AppBar position="static" className={classes.AppBar}>
         <Toolbar className={classes.Toolbar}>
           <div className={classes.leftFloated}>
@@ -45,7 +45,7 @@ function ButtonAppBar() {
         </Toolbar>
       </AppBar>
 
-    </div>
+    </nav>
   );
 }
 
