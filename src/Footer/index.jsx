@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Copyright from '../Copyright'
 
 const useStyles = makeStyles(theme => ({
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-export default function Footer(){
+function Footer(){
     const classes = useStyles();
     return (
         <footer className={classes.footer}>
@@ -24,3 +24,5 @@ export default function Footer(){
       </footer>
     )
 }
+
+export default withStyles(useStyles)(Footer);
