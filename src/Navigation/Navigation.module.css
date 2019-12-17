@@ -1,9 +1,14 @@
 .root {
-    flex-grow: 1,
+    flex-grow: 1;
+}
+
+.appBar {
+    background-color: #2B4570;
+    display: none;
 }
 
 .menuButton {
-    margin-right: 2rem,
+    margin-right: 0rem;
 }
 
 .title {
