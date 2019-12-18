@@ -7,19 +7,24 @@ const Model = mongoose.model;
 const { String, Number, Boolean, ObjectId } = Schema.Types;
 
 const userSchema = new Schema({
-
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+    },
     username: {
         type: String,
         unique: true,
         required: true
     },
-
     password: {
         type: String,
         require: true
     },
 
-    posts: [{ type: ObjectId, ref: "Origami" }]
+    history: [{ type: ObjectId, ref: "History" }]
 
 });
 

@@ -25,4 +25,4 @@ function Footer(){
     )
 }
 
-export default withStyles(useStyles)(Footer);
+export default (Footer);

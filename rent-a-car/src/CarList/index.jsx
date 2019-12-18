@@ -28,4 +28,4 @@ function CarList(props) {
   );
 }
 
-export default withStyles(useStyles)(CarList);
+export default (CarList);

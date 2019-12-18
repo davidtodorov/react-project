@@ -1,19 +1,14 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { useState } from 'react'
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Grid, Box, Typography, Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
 import Copyright from '../Copyright'
+import withForm from '../shared/withForm'
+
+import schema from './schema'
+import userService from '../services/userService'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -33,10 +28,43 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  error: {
+    color: 'red'
+  }
 }));
 
-export default function Register() {
+function Register(props) {
   const classes = useStyles();
+  const getFirstControlError = name => {
+    const errorState = props.getFormErrorState();
+    return errorState && errorState[name] && errorState[name][0];
+  };
+  const submitHandler = () => {
+    const errors = props.getFormErrorState();
+    if (!!errors) { return; }
+    const data = props.getFormState();
+    userService.register(data).then(() => {
+      props.history.push('/login');
+    });
+  };
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const firstNameOnChangeHandler = props.controlChangeHandlerFactory('firstName');
+  const lastNameOnChangeHandler = props.controlChangeHandlerFactory('lastName');
+  const usernameOnChangeHandler = props.controlChangeHandlerFactory('username');
+  const passwordOnChangeHandler = props.controlChangeHandlerFactory('password');
+  const confirmPasswordOnChangeHandler = props.controlChangeHandlerFactory('rePassword');
+
+  const firstNameError = getFirstControlError('firstName');
+  const lastNameError = getFirstControlError('lastName');
+  const usernameError = getFirstControlError('username');
+  const passwordError = getFirstControlError('password');
+  const confirmPasswordError = getFirstControlError('confirmPassword');
 
   return (
     <Container component="main" maxWidth="xs">
@@ -46,7 +74,7 @@ export default function Register() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Register
         </Typography>
         <form className={classes.form} noValidate action="post">
           <Grid container spacing={2}>
@@ -60,7 +88,9 @@ export default function Register() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={(e) => setFirstName(firstNameOnChangeHandler(e))}
               />
+              {firstNameError && <div className={classes.error}>{firstNameError}</div>}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -71,18 +101,22 @@ export default function Register() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={(e) => setLastName(lastNameOnChangeHandler(e))}
               />
+              {lastNameError && <div className={classes.error}>{lastNameError}</div>}
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                onChange={(e) => setUsername(usernameOnChangeHandler(e))}
               />
+              {usernameError && <div className={classes.error}>{usernameError}</div>}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -94,7 +128,9 @@ export default function Register() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => setPassword(passwordOnChangeHandler(e))}
               />
+              {passwordError && <div className={classes.error}>{passwordError}</div>}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -106,15 +142,17 @@ export default function Register() {
                 type="password"
                 id="confirm-password"
                 autoComplete="current-password"
+                onChange={(e) => setConfirmPassword(confirmPasswordOnChangeHandler(e))}
               />
+              {confirmPasswordError && <div className={classes.error}>{confirmPasswordError}</div>}
             </Grid>
           </Grid>
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={submitHandler}
           >
             Sign Up
           </Button>
@@ -126,3 +164,13 @@ export default function Register() {
     </Container>
   );
 }
+
+const initialFormState = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  password: '',
+  rePassword: ''
+};
+
+export default withForm(Register, initialFormState, schema)

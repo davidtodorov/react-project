@@ -11,9 +11,11 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import Copyright from '../Copyright'
+import withForm from '../shared/withForm'
+import userService from '../services/userService'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,8 +48,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignInSide() {
+function Login(props) {
   const classes = useStyles();
+
+  const submitHandler = () => {
+    const data = props.getFormState();
+    userService.login(data).then(() => {
+      props.history.push('/');
+    });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -67,10 +76,10 @@ export default function SignInSide() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -89,11 +98,11 @@ export default function SignInSide() {
               label="Remember me"
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={submitHandler}
             >
               Sign In
             </Button>
@@ -106,3 +115,10 @@ export default function SignInSide() {
     </Grid>
   );
 }
+
+const initialFormState = {
+  username: '',
+  password: '',
+};
+
+export default withForm(Login, initialFormState);

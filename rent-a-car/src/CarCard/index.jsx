@@ -56,4 +56,4 @@ function CarCard(props) {
   );
 }
 
-export default withStyles(useStyles)(CarCard);
+export default (CarCard);

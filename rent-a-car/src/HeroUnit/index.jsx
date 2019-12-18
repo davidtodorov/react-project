@@ -58,4 +58,4 @@ function HeroUnit() {
   )
 }
 
-export default withStyles(useStyles)(HeroUnit);
+export default (HeroUnit);

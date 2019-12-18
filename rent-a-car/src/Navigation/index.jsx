@@ -36,7 +36,7 @@ function ButtonAppBar() {
       <AppBar position="static" className={classes.AppBar}>
         <Toolbar className={classes.Toolbar}>
           <div className={classes.leftFloated}>
-            <Link to="/"><Button edge="start" color="inherit">Home</Button></Link>
+            <Link to="/home"><Button edge="start" color="inherit">Home</Button></Link>
           </div>
           <div className={classes.rightFloated}>
             <Link to="/login"><Button edge="start" color="inherit">Login</Button></Link>
@@ -44,7 +44,6 @@ function ButtonAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-
     </nav>
   );
 }

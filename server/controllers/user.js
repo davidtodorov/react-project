@@ -11,8 +11,9 @@ module.exports = {
 
   post: {
     register: (req, res, next) => {
-      const { username, password } = req.body;
-      models.User.create({ username, password })
+      debugger;
+      const { firstName, lastName, username, password } = req.body;
+      models.User.create({ firstName, lastName, username, password })
         .then((createdUser) => res.send(createdUser))
         .catch(next)
     },
