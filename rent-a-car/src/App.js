@@ -7,10 +7,10 @@ import {
   Route,
 } from "react-router-dom";
 
-import Navigation from './Navigation';
-import Home from './Home'
-import Login from './Login'
-import Register from './Register'
+import Navigation from './components/Navigation';
+import Home from './components/Home'
+import Login from './components/Login'
+import Register from './components/Register'
 
 
 function App() {

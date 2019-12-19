@@ -14,8 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import Copyright from '../Copyright'
-import withForm from '../shared/withForm'
-import userService from '../services/userService'
+import withForm from '../../shared/withForm'
+import userService from '../../services/userService'
 
 const useStyles = makeStyles(theme => ({
   root: {

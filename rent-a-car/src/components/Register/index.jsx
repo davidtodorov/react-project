@@ -5,10 +5,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Copyright from '../Copyright'
-import withForm from '../shared/withForm'
+import withForm from '../../shared/withForm'
 
 import schema from './schema'
-import userService from '../services/userService'
+import userService from '../../services/userService'
 
 const useStyles = makeStyles(theme => ({
   paper: {
