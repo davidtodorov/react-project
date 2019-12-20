@@ -1,6 +1,6 @@
 const userService = {
   register: function (data) {
-    return fetch(`http://localhost:9999/api/user/register`, {
+    return fetch(`http://localhost:8080/api/user/register`, {
       body: JSON.stringify(data),
       method: 'POST',
       headers: {
@@ -10,7 +10,7 @@ const userService = {
   },
 
   login: function (data) {
-    return fetch(`http://localhost:9999/api/user/login`, {
+    return fetch(`http://localhost:8080/api/user/login`, {
       body: JSON.stringify(data),
       method: 'POST',
       headers: {
@@ -21,7 +21,7 @@ const userService = {
   },
 
   logout: function () {
-    return fetch(`http://localhost:9999/api/user/logout`, {
+    return fetch(`http://localhost:8080/api/user/logout`, {
       method: 'POST',
       credentials: 'include'
     }).then(res => res.text());

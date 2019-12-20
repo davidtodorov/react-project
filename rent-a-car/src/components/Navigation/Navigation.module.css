@@ -12,5 +12,5 @@
 }
 
 .title {
-    flex-grow: 1
+    float:left;
 }

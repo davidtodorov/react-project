@@ -11,15 +11,17 @@ module.exports = {
 
   post: {
     register: (req, res, next) => {
-      debugger;
       const { firstName, lastName, username, password } = req.body;
       models.User.create({ firstName, lastName, username, password })
         .then((createdUser) => res.send(createdUser))
-        .catch(next)
+        .catch(result => {
+          debugger;
+        })
     },
 
     login: (req, res, next) => {
       const { username, password } = req.body;
+      debugger;
       models.User.findOne({ username })
         .then((user) => !!user ? Promise.all([user, user.matchPassword(password)]) : [null, false])
         .then(([user, match]) => {
@@ -29,7 +31,9 @@ module.exports = {
           }
 
           const token = utils.jwt.createToken({ id: user._id });
-          res.cookie(config.authCookieName, token).send(user);
+          debugger;
+          delete user.password;
+          res.cookie(config.authCookieName, token).send({user, token});
         })
         .catch(next);
     },

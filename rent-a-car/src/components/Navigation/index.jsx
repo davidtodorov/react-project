@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext, Fragment } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import { Link } from "react-router-dom";
+import UserContext from '../../contexts/UserContext'
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 function ButtonAppBar() {
   const classes = useStyles();
+  const { user } = useContext(UserContext)
 
   return (
     <nav className={classes.root}>
@@ -39,8 +42,17 @@ function ButtonAppBar() {
             <Link to="/home"><Button edge="start" color="inherit">Home</Button></Link>
           </div>
           <div className={classes.rightFloated}>
-            <Link to="/login"><Button edge="start" color="inherit">Login</Button></Link>
-            <Link to="/register"><Button color="inherit">Register</Button></Link>
+            {user !== null ?
+              <Fragment>
+                <Typography variant="h6" style={{float: 'left', marginRight: '3rem'}}>
+                  Welcome, {user.username}
+                </Typography>
+                <Link to="/logout"><Button edge="start" color="inherit">Logout</Button></Link>
+              </Fragment> :
+              <Fragment>
+                <Link to="/login"><Button edge="start" color="inherit">Login</Button></Link>
+                <Link to="/register"><Button color="inherit">Register</Button></Link>
+              </Fragment>}
           </div>
         </Toolbar>
       </AppBar>

@@ -62,7 +62,6 @@ export default function withForm(Cmp, initialState, schema) {
 
     controlChangeHandlerFactory = name => {
       let id;
-      debugger;
       return e => {
         const newValue = e.target.value;
         if (id) { clearTimeout(id); id = null; }

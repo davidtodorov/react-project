@@ -11,7 +11,7 @@ module.exports = (app) => {
         utils.jwt.verifyToken(token)
             .then(({ id }) => models.User.findById(id))
             .then(user => res.send(user))
-            .catch(() => res.status(401).send('HELLO!'));
+            .catch(() => res.status(401).send('Something went wrong!'));
     });
 
     app.use('/api/user', router.user);
