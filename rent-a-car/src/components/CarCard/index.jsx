@@ -36,16 +36,16 @@ function CarCard(props) {
   const classes = useStyles();
   const { car } = props;
   return (
-    <Grid item key={car} xs={12} sm={6} md={4}>
+    <Grid item key={car._id} xs={12} sm={6} md={4}>
       <Card className={classes.car}>
         <CardMedia
           className={classes.cardMedia}
-          image="https://source.unsplash.com/random"
+          image={car.thumbnailImageUrl}
           title="Image title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2"> Heading</Typography>
-          <Typography> This is a media car. You can use this section to describe the content.</Typography>
+          <Typography gutterBottom variant="h5" component="h2"> {car.manufactuer} {car.model}</Typography>
+          <Typography> {car.description}</Typography>
         </CardContent>
         <CardActions>
           <Button size="small" color="primary"> View </Button>

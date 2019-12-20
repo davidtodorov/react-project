@@ -4,7 +4,6 @@ const transport = axios.create({
 })
 const garageService = {
   get: function () {
-    debugger;
     return transport.get(`http://localhost:8080/api/car/`)
       .then(res => {
         console.log(res);
@@ -13,7 +12,6 @@ const garageService = {
       })
   },
   add: function (data) {
-    debugger;
     return transport.post(`http://localhost:8080/api/car/add`, { ...data })
       .then(res => {
         console.log(res);

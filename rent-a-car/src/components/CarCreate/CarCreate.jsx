@@ -51,7 +51,6 @@ function CarCreate(props) {
     const errors = props.getFormErrorState();
     if (!!errors) { return; }
     const data = props.getFormState();
-    debugger;
     garageService.add(data).then((data) => {
       debugger;
     });

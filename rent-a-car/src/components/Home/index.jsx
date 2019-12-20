@@ -8,8 +8,7 @@ import Footer from '../Footer'
 import garageService from '../../services/garageService';
 
 const cars = [1, 2, 3]
-const cars2 = 
-  garageService.get();
+
 
 export default function Album() {
   
