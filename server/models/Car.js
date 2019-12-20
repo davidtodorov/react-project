@@ -22,13 +22,17 @@ const carSchema = new Schema({
   },
   thumbnailImageUrl: String,
   imageUrls: [String],
-  startDay: Schema.Types.Date,
-  endDay: Schema.Types.Date,
+  startDate: {type: Date, default: null},
+  endDate: {type: Date, default: null},
   user: {
     type: ObjectId,
     ref: "User"
   },
-  price: { type: Number, required: true, default: 0 }
+  price: { type: Number, required: true, default: 0 },
+  available: {
+    type: Boolean,
+    default: true
+  }
 });
 
 module.exports = new Model('Car', carSchema);

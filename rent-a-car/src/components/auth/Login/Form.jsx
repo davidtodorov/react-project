@@ -29,6 +29,8 @@ function Form(props) {
     userService.login(data).then((result) => {
       setUserSession(result)
       history.push('/');
+    }).catch(res => {
+      debugger
     });
   };
 

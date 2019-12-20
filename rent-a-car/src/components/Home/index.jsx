@@ -1,13 +1,18 @@
 import React from 'react';
 import { CssBaseline } from '@material-ui/core';
+import axios from 'axios'
 
 import HeroUnit from '../HeroUnit'
 import CarList from '../CarList'
 import Footer from '../Footer'
+import garageService from '../../services/garageService';
 
-const cars = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cars = [1, 2, 3]
+const cars2 = 
+  garageService.get();
 
 export default function Album() {
+  
   return (
     <React.Fragment>
       <CssBaseline />

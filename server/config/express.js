@@ -4,6 +4,8 @@ const cors = require('cors');
 const secret = 'secret';
 
 module.exports = (app) => {
+  app.use(cookieParser(secret));
+
   app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
@@ -15,5 +17,4 @@ module.exports = (app) => {
 
   app.use(bodyParser.json());
 
-  app.use(cookieParser(secret));
 };
