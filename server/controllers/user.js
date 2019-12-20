@@ -32,8 +32,8 @@ module.exports = {
 
           const token = utils.jwt.createToken({ id: user._id });
           debugger;
-          delete user.password;
-          res.cookie(config.authCookieName, token).send({user, token});
+          let userDto = { username: user.username, firstName: user.firstName, lastName: user.lastName };
+          res.cookie(config.authCookieName, token).send(userDto);
         })
         .catch(next);
     },

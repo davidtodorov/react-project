@@ -3,10 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-
-import { Link } from "react-router-dom";
-import UserContext from '../../contexts/UserContext'
 import { Typography } from '@material-ui/core';
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom"
+import UserContext from '../../contexts/UserContext'
+import userService from '../../services/userService'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,9 +31,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 function ButtonAppBar() {
   const classes = useStyles();
-  const { user } = useContext(UserContext)
+  const history = useHistory();
+  const { user, destroyUserSession } = useContext(UserContext);
+
+  const logoutHandler = () => {
+    userService.logout().then(() => {
+      destroyUserSession();
+      history.push("/login");
+    });
+  }
 
   return (
     <nav className={classes.root}>
@@ -47,7 +57,7 @@ function ButtonAppBar() {
                 <Typography variant="h6" style={{float: 'left', marginRight: '3rem'}}>
                   Welcome, {user.username}
                 </Typography>
-                <Link to="/logout"><Button edge="start" color="inherit">Logout</Button></Link>
+                <Link to="/logout"><Button onClick={logoutHandler} edge="start" color="inherit">Logout</Button></Link>
               </Fragment> :
               <Fragment>
                 <Link to="/login"><Button edge="start" color="inherit">Login</Button></Link>

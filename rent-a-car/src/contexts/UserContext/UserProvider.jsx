@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import UserContext from './index';
+import Cookies from 'js-cookie';
 
 const UserProvider = (props) => {
-
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const initialCookie = Cookies.get('user') || null;
+  const initialState = initialCookie !== null ? JSON.parse(initialCookie) : null;  
+  const [user, setUser] = useState(initialState);
   const setUserSession = (userProfile) => {
-      localStorage.setItem('user', JSON.stringify(userProfile));
+    Cookies.set('user', JSON.stringify(userProfile));
       setUser(userProfile)
   }
   const destroyUserSession = () => {
-    localStorage.removeItem('user');
+    Cookies.remove('user');
     setUser(null)
   }
 
